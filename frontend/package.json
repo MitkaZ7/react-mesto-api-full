@@ -1,6 +1,5 @@
 {
   "name": "mesto-react",
-  "homepage": "https://mitkermit.github.io/react-mesto-auth/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "npm run build && scp -r ./build/* mitka@51.250.4.191:/home/mitka/frontend-mesto"
+    "deploy": "npm run build && scp -r ./build/* mitka@51.250.4.191:/home/mitka/react-mesto-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [
