@@ -8,12 +8,12 @@ export default function Header({loggedIn, email, onSignOut}) {
       <img src={logo} alt="логотип" className="header__logo" />
         <div className="header__login">
           {loggedIn && (
-            <>
+            <div>
               <p className="header__user-email">{email}</p>
                 <Route exact path="/">
                   <Link className="header__button-logout" to="/sign-in" onClick={onSignOut}>Выйти</Link>
                 </Route>
-            </>
+            </div>
           )}
           <Route path="/sign-in">
             <Link className="header__link" to="/sign-up">
