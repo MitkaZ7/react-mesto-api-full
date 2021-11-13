@@ -78,7 +78,6 @@ const api = new Api({
   baseUrl: "https://api.locus.students.nomoredomains.rocks",
   headers: {
     'Content-Type': 'application / json',
-    'authorization': `Bearer ${localStorage.getItem('_id')}`,
   }
 });
 export default api;
