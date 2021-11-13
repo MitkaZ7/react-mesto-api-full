@@ -1,0 +1,23 @@
+.page {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  max-width: 880px;
+  min-width: 320px;
+  margin: 45px auto 60px;
+}
+@media screen and (max-width: 1024px) {
+  .page {
+    margin: 37px auto 36px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    margin: 28px 0 36px;
+  }
+}
+

@@ -1,0 +1,6 @@
+.popup__filedset_place_infoToolTip {
+  margin: 0;
+}
+.popup__filedset_place_infoToolTip:last-of-type {
+  margin-bottom: 18px;
+}

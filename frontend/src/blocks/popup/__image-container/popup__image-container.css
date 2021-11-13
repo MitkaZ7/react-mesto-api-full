@@ -1,0 +1,6 @@
+.popup__image-container {
+  border-radius: 10px;
+  margin: 0 auto;
+  z-index: 2;
+  position:  relative;
+}

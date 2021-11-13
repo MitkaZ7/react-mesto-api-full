@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+}
+
+@media screen and (max-width: 1024px) {
+  .footer  {
+    margin: 0 19px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .footer {
+
+  }
+}
+

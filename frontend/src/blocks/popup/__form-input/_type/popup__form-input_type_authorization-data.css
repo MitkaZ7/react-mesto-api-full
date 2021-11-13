@@ -1,0 +1,16 @@
+.popup__form-input_type_authorization-data {
+  color:#fff;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: 2px solid #CCC;
+  padding: 36px 0px 0px;
+  background: transparent;
+  outline: none;
+  width: 358px;
+}
+@media screen and (max-width: 767px) {
+  .popup__form-input_type_authorization-data {
+    max-width: 260px;
+  }
+}

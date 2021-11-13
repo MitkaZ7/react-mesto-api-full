@@ -1,0 +1,20 @@
+.button_type_edit {
+  width: 24px;
+  height: 24px;
+  background: url(../../../images/pencil_icon_white.svg) no-repeat center;
+  border: 1px solid #fff;
+  align-self: end;
+  margin: 0 0 7px;
+}
+
+.button_type_edit:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+@media screen and (max-width: 320px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+ }
+}
