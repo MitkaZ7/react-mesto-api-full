@@ -1,0 +1,11 @@
+.popup__authorization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  max-width: 358px;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s, opacity 0.3s ease;
+}

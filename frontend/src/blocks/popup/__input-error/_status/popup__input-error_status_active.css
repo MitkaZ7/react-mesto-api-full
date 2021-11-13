@@ -1,0 +1,4 @@
+.popup__input-error_status_active {
+  display: block;
+  border-bottom: 1px solid #f00;
+}

@@ -1,0 +1,7 @@
+.place {
+ border-radius: 10px;
+ background-color: #fff;
+ position: relative;
+ white-space: nowrap;
+ overflow: hidden;
+}
