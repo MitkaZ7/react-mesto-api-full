@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const cors = require('cors');
@@ -10,7 +9,7 @@ const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
 
 const { PORT = 3000 } = process.env;
-const allowedCors = {
+const options = {
   origin: [
     'https://praktikum.tk',
     'http://praktikum.tk',
@@ -26,10 +25,8 @@ const allowedCors = {
 };
 
 const app = express();
-app.use('*', cors(allowedCors));
+app.use('*', cors(options));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(requestLogger);
 
