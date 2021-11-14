@@ -20,11 +20,20 @@ const allowedCors = [
   'http://locus.nomoredomains.rocks',
   'http://localhost:3000',
 ];
-const options = {
-  origin: allowedCors,
-};
+app.use(
+  cors({
+    credentials: true,
+    origin(origin, callback) {
+      if (allowedCors.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  }),
+);
 
-app.use(cors(options));
+app.options('*', cors());
 
 app.use(cookieParser());
 
