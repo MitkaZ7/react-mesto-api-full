@@ -89,5 +89,5 @@ class Api {
       .then(this._checkResponse)
   }
 }
-const api = new Api('https://api.locus.students.nomoredomains.rocks');
+const api = new Api('api.locus.students.nomoredomains.rocks');
 export default api;

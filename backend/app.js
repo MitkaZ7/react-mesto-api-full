@@ -36,6 +36,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const options = {
   origin: [
     'https://locus.nomoredomains.rocks',
+    'http://locus.nomoredomains.rocks',
     'http://localhost:3000',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
