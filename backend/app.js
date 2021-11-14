@@ -15,11 +15,16 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-// const allowedCors = [
-//   'https://locus.nomoredomains.rocks',
-//   'http://locus.nomoredomains.rocks',
-//   'http://localhost:3000',
-// ];
+const allowedCors = [
+  'https://locus.nomoredomains.rocks',
+  'http://locus.nomoredomains.rocks',
+  'http://localhost:3000',
+];
+const corsOptions = {
+  origin: allowedCors,
+};
+
+app.use(cors(corsOptions));
 // app.use(
 //   cors({
 //     credentials: true,
@@ -33,20 +38,20 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 //   }),
 // );
 
-const options = {
-  origin: [
-    'https://locus.nomoredomains.rocks',
-    'http://locus.nomoredomains.rocks',
-    'http://localhost:3000',
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-  preflightContinue: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
-  credentials: true,
-};
+// const options = {
+//   origin: [
+//     'https://locus.nomoredomains.rocks',
+//     'http://locus.nomoredomains.rocks',
+//     'http://localhost:3000',
+//   ],
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+//   credentials: true,
+// };
 
-app.options('*', cors(options));
+// app.options('*', cors(options));
 
 app.use(cookieParser());
 
