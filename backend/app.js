@@ -45,7 +45,7 @@ const options = {
   credentials: true,
 };
 
-app.options('*', cors({ options }));
+app.options('*', cors(options));
 
 app.use(cookieParser());
 
