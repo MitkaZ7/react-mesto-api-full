@@ -1,44 +1,55 @@
 class Api {
-  constructor(options) {
-    this._url = options.baseUrl;
-    this._headers = options.headers;
+  constructor(url) {
+    this._url = url;
   }
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`${res.status}`);
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка ${res.status}`);
+    }
   }
   getUserInfo() {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._url}users/me`, {
       method: 'GET',
-      credentials: 'include',
-      headers: this._headers,
+      сredentials: 'include',
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
   getInitialCards() {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}cards`, {
       method: 'GET',
-      credentials: 'include',
-      headers: this._headers,
+      сredentials: 'include',
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
   editUserInfo(data) {
-    return fetch(`${this._url}/users/me`, {
-      method:'PATCH',
-      credentials: 'include',
-      headers: this._headers,
+    return fetch(`${this._url}users/me`, {
+      method: 'PATCH',
+      сredentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about
       })
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
   editUserAvatar(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
+    return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      credentials: 'include',
-      headers: this._headers,
+      сredentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -46,39 +57,39 @@ class Api {
       .then(this._checkResponse)
   }
   addNewCard(data) {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}cards`, {
       method: 'POST',
-      credentials: 'include',
-      headers: this._headers,
+      сredentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: data.placeName,
         link: data.imageUrl
       })
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
   likeCard(cardId, isLiked) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
       method: `${!isLiked ? 'PUT' : 'DELETE'}`,
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
   removeCard(cardId) {
-    return fetch(`${this._url}/cards/${cardId}`, {
+    return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
     })
       .then(this._checkResponse)
   }
 }
-const api = new Api({
-  baseUrl: 'http://api.locus.students.nomoredomains.rocks',
-  headers: {
-    'Content-Type': 'application / json',
-    Accept: "application/json"
-  }
-});
+const api = new Api('https://api.locus.students.nomoredomains.rocks');
 export default api;
