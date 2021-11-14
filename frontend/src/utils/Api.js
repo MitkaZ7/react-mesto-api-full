@@ -10,7 +10,7 @@ class Api {
     }
   }
   getUserInfo() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'GET',
       сredentials: 'include',
       headers: {
@@ -20,7 +20,7 @@ class Api {
       .then(this._checkResponse)
   }
   getInitialCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: 'GET',
       сredentials: 'include',
       headers: {
@@ -30,7 +30,7 @@ class Api {
       .then(this._checkResponse)
   }
   editUserInfo(data) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       сredentials: 'include',
       headers: {
@@ -44,7 +44,7 @@ class Api {
       .then(this._checkResponse)
   }
   editUserAvatar(data) {
-    return fetch(`${this._url}users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       сredentials: 'include',
       headers: {
@@ -57,7 +57,7 @@ class Api {
       .then(this._checkResponse)
   }
   addNewCard(data) {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       сredentials: 'include',
       headers: {
@@ -71,20 +71,18 @@ class Api {
       .then(this._checkResponse)
   }
   likeCard(cardId, isLiked) {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: `${!isLiked ? 'PUT' : 'DELETE'}`,
       headers: {
-        authorization: this._token,
         'Content-Type': 'application/json'
       }
     })
       .then(this._checkResponse)
   }
   removeCard(cardId) {
-    return fetch(`${this._url}cards/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._token,
         'Content-Type': 'application/json'
       }
     })
