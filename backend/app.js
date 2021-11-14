@@ -15,25 +15,37 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-const allowedCors = [
-  'https://locus.nomoredomains.rocks',
-  'http://locus.nomoredomains.rocks',
-  'http://localhost:3000',
-];
-app.use(
-  cors({
-    credentials: true,
-    origin(origin, callback) {
-      if (allowedCors.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-  }),
-);
+// const allowedCors = [
+//   'https://locus.nomoredomains.rocks',
+//   'http://locus.nomoredomains.rocks',
+//   'http://localhost:3000',
+// ];
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin(origin, callback) {
+//       if (allowedCors.includes(origin) || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//   }),
+// );
 
-app.options('*', cors());
+const options = {
+  origin: [
+    'https://locus.nomoredomains.rocks',
+    'http://localhost:3000',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+
+app.options('*', cors({ options }));
 
 app.use(cookieParser());
 
