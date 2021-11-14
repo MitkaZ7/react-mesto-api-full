@@ -1,4 +1,4 @@
-export const url = 'api.locus.students.nomoredomains.rocks';
+export const url = 'https://api.locus.students.nomoredomains.rocks';
 
 const checkResponse = (res) =>
   res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
