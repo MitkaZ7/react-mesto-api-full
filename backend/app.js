@@ -8,25 +8,27 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
 
-const { PORT = 3000 } = process.env;
-// const allowedCors = [
-//   'https://praktikum.tk',
-//   'http://praktikum.tk',
-//   'https://locus.nomoredomains.rocks',
-//   'http://locus.nomoredomains.rocks',
-//   'http://localhost:3000',
-// ];
-
 const app = express();
-app.use(cors());
-app.options('*', cors());
-
-app.use(cookieParser());
-app.use(requestLogger);
+const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
+
+const allowedCors = [
+  'https://locus.nomoredomains.rocks',
+  'http://locus.nomoredomains.rocks',
+  'http://localhost:3000',
+];
+const options = {
+  origin: allowedCors,
+};
+
+app.use(cors(options));
+
+app.use(cookieParser());
+
+app.use(requestLogger);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
