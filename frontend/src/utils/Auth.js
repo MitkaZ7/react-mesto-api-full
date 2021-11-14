@@ -7,6 +7,7 @@ export const register = (email, password) => {
   return fetch(`${url}/signup`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -18,10 +19,22 @@ export const authorize = ({ password, email }) => {
     method: "POST",
     credentials: 'include',
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(checkResponse);
+  })
+    .then((response) => {
+        return response.json();
+  })
+    .then((data) => {
+      console.log(data);
+      if (data.token) {
+        localStorage.setItem('token', data.token)
+        return data;
+      }
+    })
+    .catch((err) => console.log(err));
 };
 
 export const checkToken = (token) => {
@@ -29,6 +42,7 @@ export const checkToken = (token) => {
     method: "GET",
     credentials: 'include',
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
