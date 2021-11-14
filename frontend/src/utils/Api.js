@@ -14,6 +14,7 @@ class Api {
       method: 'GET',
       сredentials: 'include',
       headers: {
+        origin,
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
@@ -26,6 +27,7 @@ class Api {
       method: 'GET',
       сredentials: 'include',
       headers: {
+        origin,
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
@@ -38,7 +40,7 @@ class Api {
       method: 'PATCH',
       сredentials: 'include',
       headers: {
-        Accept: "application/json",
+        origin,
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
@@ -54,7 +56,7 @@ class Api {
       method: 'PATCH',
       сredentials: 'include',
       headers: {
-        Accept: "application/json",
+        origin,
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
@@ -69,7 +71,6 @@ class Api {
       method: 'POST',
       сredentials: 'include',
       headers: {
-        Accept: "application/json",
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
@@ -84,7 +85,6 @@ class Api {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: `${!isLiked ? 'PUT' : 'DELETE'}`,
       headers: {
-        Accept: "application/json",
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       }
@@ -95,7 +95,6 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
-        Accept: "application/json",
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       }
