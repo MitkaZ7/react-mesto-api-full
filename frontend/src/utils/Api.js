@@ -1,6 +1,7 @@
 class Api {
-  constructor(url) {
+  constructor({url, headers}) {
     this._url = url;
+    this._headers = headers;
   }
   _checkResponse(res) {
     if (res.ok) {
@@ -9,41 +10,25 @@ class Api {
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
-  getUserInfo() {
+  getUserInfo(token) {
+    console.log('getUserInfo в utils/api: ' + token);
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      сredentials: 'include',
-      headers: {
-        origin,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
-      сredentials: 'include',
-      headers: {
-        origin,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  editUserInfo(data) {
+  editUserInfo(data, token) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      сredentials: 'include',
-      headers: {
-        origin,
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -51,29 +36,20 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  editUserAvatar(data) {
+  editUserAvatar(data, token) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      сredentials: 'include',
-      headers: {
-        origin,
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
       })
     })
       .then(this._checkResponse)
   }
-  addNewCard(data) {
+  addNewCard(data, token) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
-      сredentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.placeName,
         link: data.imageUrl
@@ -81,27 +57,29 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  likeCard(cardId, isLiked) {
+  likeCard(cardId, isLiked, token) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: `${!isLiked ? 'PUT' : 'DELETE'}`,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  removeCard(cardId) {
+  removeCard(cardId, token) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
 }
-const api = new Api('https://api.locus.students.nomoredomains.rocks');
-const token = localStorage.getItem('token');
+
+const config = {
+  url: 'https://api.locus.students.nomoredomains.rocks',
+  //url: 'http://localhost:3000',
+  headers: {
+    'Content-type': 'application/json',
+    'Authorization': `Bearer ${'token'}`,
+  }
+};
+const api = new Api(config);
 export default api;

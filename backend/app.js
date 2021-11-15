@@ -19,7 +19,7 @@ const options = {
   origin: [
     'https://locus.nomoredomains.rocks',
     'http://locus.nomoredomains.rocks',
-    'http://localhost:3000',
+    'http://localhost:3001',
   ],
   methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
@@ -28,7 +28,7 @@ const options = {
   credentials: true,
 };
 
-app.options('*', cors(options));
+app.use(cors(options));
 
 app.use(cookieParser());
 

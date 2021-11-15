@@ -1,3 +1,4 @@
+// export const url = 'http://localhost:3000';
 export const url = 'https://api.locus.students.nomoredomains.rocks';
 
 const checkResponse = (res) =>
@@ -19,7 +20,6 @@ export const authorize = ({ password, email }) => {
     method: "POST",
     credentials: 'include',
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -38,13 +38,12 @@ export const authorize = ({ password, email }) => {
 };
 
 export const checkToken = (token) => {
+  console.log('getToken в utils/auth: ' + token)
   return fetch(`${url}/users/me`, {
     method: "GET",
-    credentials: 'include',
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   }).then(checkResponse);
 };

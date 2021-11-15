@@ -44,7 +44,7 @@ function App() {
     setIsInfoTooltipOpen(!isInfoTooltipOpen);
   }
   function handleCheckToken() {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
     if (token) {
       authApi.checkToken(token)
       .then((res) => {
