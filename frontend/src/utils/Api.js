@@ -1,5 +1,5 @@
 class Api {
-  constructor({url, headers}) {
+  constructor({ url, headers }) {
     this._url = url;
     this._headers = headers;
   }
@@ -10,22 +10,22 @@ class Api {
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
-  getUserInfo(token) {
-    console.log('getUserInfo в utils/api: ' + token);
+  getUserInfo() {
+    //console.log('getUserInfo в utils/api: ' + token);
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  editUserInfo(data, token) {
+  editUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -36,7 +36,7 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  editUserAvatar(data, token) {
+  editUserAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -46,7 +46,7 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  addNewCard(data, token) {
+  addNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -57,14 +57,14 @@ class Api {
     })
       .then(this._checkResponse)
   }
-  likeCard(cardId, isLiked, token) {
+  likeCard(cardId, isLiked) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: `${!isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers,
     })
       .then(this._checkResponse)
   }
-  removeCard(cardId, token) {
+  removeCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
@@ -78,7 +78,6 @@ const config = {
   //url: 'http://localhost:3000',
   headers: {
     'Content-type': 'application/json',
-    'Authorization': `Bearer ${'token'}`,
   }
 };
 const api = new Api(config);
