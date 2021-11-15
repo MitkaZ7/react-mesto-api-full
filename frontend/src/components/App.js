@@ -78,7 +78,7 @@ function App() {
       console.log('Не удалось зарегистрироваться' + error);
     })
   }
-  // auth
+  // login
   function handleLogin ({email, password}) {
     authApi.authorize({email, password})
     .then((res) => {
