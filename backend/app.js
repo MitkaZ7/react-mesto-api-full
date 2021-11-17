@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
-const cors = require('cors');
 const { createUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/NotFoundError');
@@ -14,20 +14,22 @@ const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
-const options = {
-  origin: [
-    'https://locus.nomoredomains.rocks',
-    'http://locus.nomoredomains.rocks',
-    'http://localhost:3001',
-  ],
-  methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'Origin', 'Authorization'],
-  credentials: true,
-};
+// const options = {
+//   origin: [
+//     'https://locus.nomoredomains.rocks',
+//     'http://locus.nomoredomains.rocks',
+//     'http://localhost:3001',
+//   ],
+//   methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: ['Content-Type', 'Origin', 'Authorization'],
+//   credentials: true,
+// };
 
-app.use(cors(options));
+app.use(cors({
+  origin: 'https://locus.nomoredomains.rocks',
+}));
 
 app.use(cookieParser());
 
