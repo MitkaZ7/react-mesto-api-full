@@ -28,7 +28,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 // };
 
 app.use(cors({
-  origin: 'https://locus.nomoredomains.rocks',
+  origin: [
+    'https://locus.nomoredomains.rocks',
+    'http://locus.nomoredomains.rocks',
+    'http://localhost:3001',
+  ],
+  methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  credentials: true,
 }));
 
 app.use(cookieParser());
