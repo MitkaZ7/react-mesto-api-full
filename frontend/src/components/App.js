@@ -63,14 +63,16 @@ function App() {
     handleCheckToken();
   }, []);
   // registration
-  function handleRegistration(email, password) {
-    authApi.register(email, password)
-    .then((res) => {
-      if (res.data) {
+  function handleRegistration({ email, password }) {
+    authApi
+    .register({
+      email: email,
+      password: password,
+    })
+    .then(() => {
         setIsSuccessSignUp(true);
         handleInfoTooltipOpen();
         history.push('/sign-in');
-      }
     })
     .catch((error) => {
       setIsSuccessSignUp(false);
@@ -79,10 +81,13 @@ function App() {
     })
   }
   // login
-  function handleLogin ({email, password}) {
-    authApi.authorize({email, password})
+  function handleLogin ({ email, password }) {
+    authApi
+    .login({
+      email,
+      password,})
     .then((res) => {
-      if (res.token) {
+      if (res.message === 'Вход совершен успешно') {
         setEmail(email);
         setLoggedIn(true);
         localStorage.setItem('jwt', res.token);
@@ -224,8 +229,7 @@ function App() {
             <Register handleRegistration={handleRegistration}/>
           </Route>
           <Route path="/sign-in">
-            <Login onSubmit={handleLogin}
-              onCheckToken={handleCheckToken} />
+            <Login onSubmit={handleLogin}/>
           </Route>
           <Route path="/">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
