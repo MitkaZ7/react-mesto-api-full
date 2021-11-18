@@ -1,4 +1,3 @@
-require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -6,6 +5,8 @@ const AuthError = require('../errors/AuthError');
 const NotFoundError = require('../errors/NotFoundError');
 const BadReqError = require('../errors/BadReqError');
 const ExistUserError = require('../errors/ExistUserError');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -102,16 +103,8 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new AuthError('Неверный логин или пароль');
           }
-          const { NODE_ENV, JWT_SECRET } = process.env;
-          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
-          return res
-            .cookie('jwt', token, {
-              maxAge: 3600000 * 24 * 7,
-              httpOnly: true,
-              secure: true,
-              sameSite: 'none',
-            })
-            .send({ message: 'Успешный вход' });
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+          res.send({ token });
         })
         .catch(next);
     })
