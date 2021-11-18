@@ -15,7 +15,7 @@ export const register = (email, password) => {
   }).then(checkResponse);
 };
 
-export const authorize = ({ password, email }) => {
+export const login = ({ password, email }) => {
   return fetch(`${url}/signin`, {
     method: "POST",
     credentials: 'include',
@@ -37,12 +37,12 @@ export const authorize = ({ password, email }) => {
     .catch((err) => console.log(err));
 };
 
-export const checkToken = (token) => {
+export const checkToken = () => {
   return fetch(`${url}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
     },
+    credentials: 'include',
   }).then(checkResponse);
 };
