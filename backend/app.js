@@ -22,6 +22,7 @@ app.use(cors({
   ],
   methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type'],
+  credentials: true,
 }));
 
 app.use(cookieParser());
