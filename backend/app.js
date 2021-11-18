@@ -6,26 +6,13 @@ const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const { createUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
+const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
 const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
-
-// const options = {
-//   origin: [
-//     'https://locus.nomoredomains.rocks',
-//     'http://locus.nomoredomains.rocks',
-//     'http://localhost:3001',
-//   ],
-//   methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-//   allowedHeaders: ['Content-Type', 'Origin', 'Authorization'],
-//   credentials: true,
-// };
 
 app.use(cors({
   origin: [
@@ -34,7 +21,7 @@ app.use(cors({
     'http://localhost:3001',
   ],
   methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  credentials: true,
+  allowedHeaders: ['Content-Type'],
 }));
 
 app.use(cookieParser());
@@ -43,6 +30,11 @@ app.use(requestLogger);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({

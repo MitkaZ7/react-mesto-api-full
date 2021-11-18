@@ -11,7 +11,6 @@ class Api {
     }
   }
   getUserInfo() {
-    //console.log('getUserInfo в utils/api: ' + token);
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers,

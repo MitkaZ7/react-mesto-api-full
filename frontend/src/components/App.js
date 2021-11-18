@@ -75,7 +75,7 @@ function App() {
     .catch((error) => {
       setIsSuccessSignUp(false);
       handleInfoTooltipOpen();
-      console.log('Не удалось зарегистрироваться' + error);
+      console.log('Не удалось зарегистрироваться ' + error);
     })
   }
   // login
