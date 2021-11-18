@@ -24,17 +24,17 @@ export const login = ({ password, email }) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.token) {
-        localStorage.setItem('token', data.token)
-        return data;
-      }
-    })
-    .catch((err) => console.log(err));
+    // .then((response) => {
+    //   return response.json();
+    // })
+    // .then((data) => {
+    //   console.log(data);
+    //   if (data.token) {
+    //     localStorage.setItem('token', data.token)
+    //     return data;
+    //   }
+    // })
+    // .catch((err) => console.log(err));
 };
 
 export const checkToken = () => {
