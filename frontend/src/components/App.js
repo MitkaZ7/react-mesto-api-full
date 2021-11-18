@@ -15,6 +15,7 @@ import ImagePopup from './ImagePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
+import auth from '../../../backend/middlewares/auth';
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -44,9 +45,8 @@ function App() {
     setIsInfoTooltipOpen(!isInfoTooltipOpen);
   }
   function handleCheckToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      authApi.checkToken(token)
+    auth
+      .checkToken()
       .then((res) => {
         if (res.data.email) {
           setEmail(res.data.email);
@@ -54,17 +54,26 @@ function App() {
           history.push('/');
         }
       })
-      .catch((error) => {
-        console.log('Не удалось авторизоваться' + error);
-      })
-    }
+    // if (token) {
+    //   authApi.checkToken(token)
+      // .then((res) => {
+      //   if (res.data.email) {
+      //     setEmail(res.data.email);
+      //     setLoggedIn(true);
+      //     history.push('/');
+      //   }
+      // })
+    //   .catch((error) => {
+    //     console.log('Не удалось авторизоваться' + error);
+    //   })
+    // }
   }
   useEffect(() => {
     handleCheckToken();
   }, []);
   // registration
   function handleRegistration({ email, password }) {
-    authApi
+    auth
     .register({
       email: email,
       password: password,
